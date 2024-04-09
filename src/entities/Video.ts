@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Event } from './Event';
 @Entity('videos')
 export class Video{
   @PrimaryGeneratedColumn()
@@ -12,4 +12,7 @@ export class Video{
   url: string
 
   // aqui eu tenho que criar um relacionamento de muitos videos para uma data
+  @ManyToOne(() => Event, event => event.video)
+  @JoinColumn({name: 'event_id'})
+  event: Event
 }
